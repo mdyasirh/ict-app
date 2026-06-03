@@ -1,4 +1,3 @@
--- Create users table for authentication
 CREATE TABLE IF NOT EXISTS users (
   id SERIAL PRIMARY KEY,
   username VARCHAR(100) UNIQUE NOT NULL,
@@ -8,7 +7,6 @@ CREATE TABLE IF NOT EXISTS users (
   created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
 
--- Create patients table
 CREATE TABLE IF NOT EXISTS patients (
   id SERIAL PRIMARY KEY,
   name VARCHAR(100) NOT NULL,
@@ -17,7 +15,6 @@ CREATE TABLE IF NOT EXISTS patients (
   created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
 
--- Create clinicians table
 CREATE TABLE IF NOT EXISTS clinicians (
   id SERIAL PRIMARY KEY,
   name VARCHAR(100) NOT NULL,
@@ -26,7 +23,6 @@ CREATE TABLE IF NOT EXISTS clinicians (
   created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
 
--- Create appointments table
 CREATE TABLE IF NOT EXISTS appointments (
   id SERIAL PRIMARY KEY,
   patient_id INTEGER NOT NULL,
@@ -39,7 +35,6 @@ CREATE TABLE IF NOT EXISTS appointments (
   updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
 
--- Create audit_log table for compliance
 CREATE TABLE IF NOT EXISTS audit_log (
   id SERIAL PRIMARY KEY,
   clinician_id INTEGER,
@@ -48,7 +43,6 @@ CREATE TABLE IF NOT EXISTS audit_log (
   timestamp TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
 
--- Create indexes for performance
 CREATE INDEX IF NOT EXISTS idx_appointments_patient ON appointments(patient_id);
 CREATE INDEX IF NOT EXISTS idx_appointments_clinic ON appointments(clinic_id);
 CREATE INDEX IF NOT EXISTS idx_appointments_datetime ON appointments(appointment_datetime);
