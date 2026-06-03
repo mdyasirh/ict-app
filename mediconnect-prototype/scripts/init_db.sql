@@ -1,15 +1,3 @@
--- MediConnect Database Initialization Script
--- Creates initial roles and sample data for testing
-
--- Create roles table for RBAC
-CREATE TABLE IF NOT EXISTS roles (
-    id SERIAL PRIMARY KEY,
-    name VARCHAR(50) UNIQUE NOT NULL,
-    description VARCHAR(255),
-    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
-);
-
--- Create users table for authentication
 CREATE TABLE IF NOT EXISTS users (
     id SERIAL PRIMARY KEY,
     username VARCHAR(100) UNIQUE NOT NULL,
@@ -22,7 +10,6 @@ CREATE TABLE IF NOT EXISTS users (
     updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
 
--- Create patients table
 CREATE TABLE IF NOT EXISTS patients (
     id SERIAL PRIMARY KEY,
     user_id INTEGER UNIQUE NOT NULL,
@@ -36,7 +23,6 @@ CREATE TABLE IF NOT EXISTS patients (
     updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
 
--- Create clinicians table
 CREATE TABLE IF NOT EXISTS clinicians (
     id SERIAL PRIMARY KEY,
     user_id INTEGER UNIQUE NOT NULL,
@@ -48,7 +34,6 @@ CREATE TABLE IF NOT EXISTS clinicians (
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
 
--- Create appointments table
 CREATE TABLE IF NOT EXISTS appointments (
     id SERIAL PRIMARY KEY,
     patient_id INTEGER REFERENCES patients(id),
@@ -66,7 +51,6 @@ CREATE TABLE IF NOT EXISTS appointments (
     cancelled_at TIMESTAMP
 );
 
--- Create audit_log table for compliance
 CREATE TABLE IF NOT EXISTS audit_log (
     id SERIAL PRIMARY KEY,
     user_id INTEGER,
@@ -76,18 +60,8 @@ CREATE TABLE IF NOT EXISTS audit_log (
     timestamp TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
 
--- Create indexes for performance
-CREATE INDEX IF NOT EXISTS idx_users_username ON users(username);
-CREATE INDEX IF NOT EXISTS idx_users_role ON users(role_id);
 CREATE INDEX IF NOT EXISTS idx_appointments_patient ON appointments(patient_id);
 CREATE INDEX IF NOT EXISTS idx_appointments_clinician ON appointments(clinician_id);
 CREATE INDEX IF NOT EXISTS idx_appointments_clinic ON appointments(clinic_id);
-CREATE INDEX IF NOT EXISTS idx_appointments_date ON appointments(appointment_date);
-CREATE INDEX IF NOT EXISTS idx_appointments_status ON appointments(status);
-
--- Insert default roles
-INSERT INTO roles (name, description) VALUES 
-    ('patient', 'Patient user - can manage own appointments'),
-    ('clinician', 'Healthcare provider - cross-site access'),
-    ('admin', 'System administrator - full access')
-ON CONFLICT (name) DO NOTHING;
+CREATE INDEX IF NOT EXISTS idx_appointments_datetime ON appointments(appointment_datetime);
+CREATE INDEX IF NOT EXISTS idx_users_username ON users(username);

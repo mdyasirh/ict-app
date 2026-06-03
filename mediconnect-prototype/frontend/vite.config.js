@@ -5,18 +5,12 @@ export default defineConfig({
   plugins: [react()],
   server: {
     port: 5173,
-    host: true,
-    proxy: {
-      '/api/auth': {
-        target: 'http://localhost:8001',
-        changeOrigin: true,
-        rewrite: (path) => path.replace(/^\/api/, ''),
-      },
-      '/api/bookings': {
-        target: 'http://localhost:8002',
-        changeOrigin: true,
-        rewrite: (path) => path.replace(/^\/api/, ''),
-      },
-    },
+    host: '0.0.0.0',
+    strictPort: false
   },
+  build: {
+    outDir: 'dist',
+    sourcemap: false,
+    minify: 'terser'
+  }
 })
