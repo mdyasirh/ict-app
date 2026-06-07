@@ -1,28 +1,30 @@
 ```
-# Dependencies
-node_modules/
-.venv/
-venv/
+# Python
 __pycache__/
 *.pyc
 *.pyo
 *.pyd
-
-# Environment variables
-.env
-.env.local
-.env.*
+.Python
+env/
+venv/
+.venv/
+.ENV
+.venv.bak/
+pip-log.txt
+pip-selfcheck.json
+.pytest_cache/
+.mypy_cache/
+.coverage
+.coverage.*
+htmlcov/
 
 # Logs
 *.log
 
-# Coverage reports
-coverage/
-htmlcov/
-.coverage
-
-# Docker
-.dockerenv
+# Environment variables
+.env
+.env.local
+*.env*
 
 # IDE specific
 .vscode/
@@ -33,34 +35,23 @@ htmlcov/
 
 # OS generated files
 .DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
 Thumbs.db
 
-# Python specific
-*.py[cod]
-*$py.class
-*.so
-.Python
-build/
-develop-eggs/
+# Build and distribution artifacts
 dist/
-downloads/
-eggs/
-.eggs/
-lib/
-lib64/
-parts/
-sdist/
-var/
-wheels/
+build/
 *.egg-info/
-.installed.cfg
-*.egg
+.sconsign.dblite
+._build/
+cover/
 
-# Frontend build artifacts
-dist/
-build/
+# Testing
+.pytest_cache/
+.noseids
 coverage/
-
-# Docker compose
-.dockerenv
 ```
